@@ -189,4 +189,324 @@ In summary, as data is transmitted through the network, each layer of the OSI mo
 
 ---
 
-# Ethernet frame
+# IPv4 Addressing
+
+!["Routing"](/Routing.png)
+
+The notation "192.168.1.0/24" and "192.168.2.0/24" are examples of CIDR (Classless Inter-Domain Routing) notation, which is used to specify the IP address range and the subnet mask of a network.
+
+The IP address "192.168.1.0" is the first address in the range of IP addresses that make up the network, and the number "24" following the "/" symbol is the subnet mask. The subnet mask is used to determine the number of bits that make up the network portion of the IP address, and the remaining bits make up the host portion of the IP address.
+
+In the case of "192.168.1.0/24", the first 24 bits of the IP address are used to define the network portion of the address, and the remaining 8 bits are used to define the host portion of the address. This means that the network can contain up to 256 possible IP addresses (2^8 = 256), with the range of IP addresses being "192.168.1.0" to "192.168.1.255".
+
+Similarly, "192.168.2.0/24" is another example of CIDR notation which covers the IP address range from "192.168.2.0" to "192.168.2.255".
+
+An example of how these networks can be used:
+
+- The network "192.168.1.0/24" could be used for the devices in an office building, while the network "192.168.2.0/24" could be used for devices in a factory.
+
+- Another example would be if you have two different physical locations and you want to separate their networks, you can use the "192.168.1.0/24" for location 1 and "192.168.2.0/24" for location 2.
+
+It's worth mentioning that these IP address ranges are from the private IP address space, which means they are not publicly routed on the internet and only can be used for internal networks.
+
+### Router typically needs multiple IP addresses
+
+A router typically needs multiple IP addresses because it connects multiple networks together and acts as a gateway between them. Each network interface on a router corresponds to a unique IP address, as each network interface represents a connection to a different network.
+
+!["Router IP addresses"](/router-public-private-ip.png)
+
+For example, consider a router that connects a local area network (LAN) to the internet. The router would have at least two network interfaces: one for the LAN and one for the internet connection. The LAN interface would have a private IP address, such as "192.168.1.1", while the internet interface would have a <span style="color:#d19a66">**public IP address assigned by the internet service provider (ISP).**</span>
+
+<span style="color:#d19a66">**The private IP address on the LAN interface is used to communicate with devices on the local network, while the public IP address on the internet interface is used to communicate with devices on the global internet.**</span>
+
+Another example would be in a situation where a router connects multiple LANs together, it can use different IP addresses on different interfaces to separate the traffic between the LANs and maintain security.
+
+In addition, routers use different IP addresses on different interfaces to route traffic between networks. <span style="color:#d19a66">**The router uses the IP address and subnet mask of each interface to determine which interface to forward the incoming packet to.**</span> This allows the router to efficiently route traffic between networks, even if the networks have overlapping IP address ranges.
+
+In summary, routers use multiple IP addresses to connect and route traffic between multiple networks. Each IP address corresponds to a unique network interface, which represents a connection to a different network. This enables the router to act as a gateway between networks and facilitates communication between devices on different networks.
+
+### IPv4 Addresses
+
+!["IPv4 Addresses"](/IPv4%20Addresses.png)
+
+IPv4 addresses are 32-bit binary numbers that are typically represented in decimal format using the dot-decimal notation. Each decimal number in an IPv4 address, also known as an octet, is between 0 and 255. The four octets of an IPv4 address are separated by dots and represent the network and host portions of the address.
+
+### IPv4 address Classes
+
+IPv4 addresses are divided into five classes: A, B, C, D, and E. Each class has a specific range of addresses, and the classes are defined based on the value of the first octet (the first number) of the IP address.
+
+!["IPv4 Address Classes"](/IPv4%20Address%20Classes.png)
+
+!["IPv4 Address Classes"](/IPv4%20Addresses%20Classes.png)
+
+!["IPv4 Address Classes"](/class-a-b-c.png)
+
+!["IPv4 Address Classes Chart"](/IPv4-classes-chart.png)
+
+!["Netmask"](/Netmask.png)
+
+- Class A addresses have a first octet in the range of 1 to 126. The first octet is the network address, and the remaining three octets are used for identifying individual hosts. An example of a Class A address is 10.0.0.1, where 10 is the network address and 0.0.1 is the host address.
+
+- Class B addresses have a first octet in the range of 128 to 191. The first two octets are used for the network address, and the remaining two octets are used for identifying individual hosts. An example of a Class B address is 172.16.0.1, where 172.16 is the network address and 0.1 is the host address.
+
+- Class C addresses have a first octet in the range of 192 to 223. The first three octets are used for the network address, and the remaining octet is used for identifying individual hosts. An example of a Class C address is 192.168.1.1, where 192.168.1 is the network address and 1 is the host address.
+
+- Class D addresses are used for multicast addresses, which are used to send a single packet to multiple hosts. Class D addresses have a first octet in the range of 224 to 239.
+
+- Class E addresses are reserved for experimental use and have a first octet in the range of 240 to 255.
+
+It's worth noting that, IPv4 address classes are not widely used anymore, due to the scarcity of IPv4 address, instead CIDR (Classless Inter-Domain Routing) notation is used to represent IP addresses.
+
+!["Network Address"](/Network%20Address.png)
+
+!["Broadcast Address"](/Braoadcast%20Address.png)
+
+### Loopback Addresses
+
+!["Loopback Address"](/loopback-address.jpg)
+
+A loopback address is a special IP address, usually assigned to the loopback interface, <span style="color:#d19a66">**that is used to test the network configuration and connectivity of a device.**</span> The most commonly used loopback address is 127.0.0.1, which is assigned to the IPv4 loopback interface. Additionally, the IPv6 loopback address is ::1.
+
+When a device sends a packet to the loopback address, the packet is looped back to the device itself, rather than being sent out onto the network. This allows the device to test its own network interface, without the need for another device to be connected to the network.
+
+For example, a computer can use the loopback address to test its own network interface card (NIC) by pinging the loopback address. If the computer can successfully ping the loopback address, it means that the NIC is working properly and that the TCP/IP stack is configured correctly.
+
+Additionally, Loopback address is used in some applications and protocols to bind on to the localhost or loopback interface, this allows the application to listen to network connections only from the local host, and not from remote hosts, this enhance the security of these applications and protocols.
+
+In summary, loopback addresses are a useful tool for testing the basic functionality of a device's network interface and TCP/IP stack, and also used in some applications and protocols to bind to the localhost or loopback interface for security reason.
+
+> Note: The first address in each network is the <span style="color:#d19a66; font-weight:medium">"Network address"</span>, it can't be assigned to hosts. Also the last address of the network is the <span style="color:#d19a66; font-weight:medium">"Broadcast address"</span>, the Layer 3 address used when you want to send traffic to all hosts. It also can't be assigned to hosts.
+
+---
+
+# CISCO Device Configuration Using CLI
+
+!["CISCO IOS device modes"](/Router-Mods-and-Prompt.png)
+
+!["IOS Mode Hierarchical"](/IOS%20mode%20hierarichal.png)
+
+### 1. User exec mode
+
+User exec mode, also known as user mode, is one of the three main modes of operation in Cisco IOS. It is the default mode when you first log into a Cisco device. <span style="color:#d19a66">**In this mode, you can view basic system information and perform a limited set of commands.**</span>
+
+Examples of commands that can be used in user exec mode include:
+
+- `show version`: Displays information about the version of IOS running on the device, as well as the device's hostname, uptime, and memory usage.
+
+- `show interfaces`: Displays information about the status of the device's interfaces, such as their speed, duplex, and whether they are up or down.
+
+- `ping`: Sends ICMP echo requests to a specified IP address to test connectivity.
+
+Commands that allow you to make changes to the device's configuration, such as `configure terminal` or `interface`, will not be available in user exec mode, as those require privilege level 15 or higher.
+
+<br>
+
+### 2. Privileged exec mode
+
+Privileged exec mode, also known as privileged mode or enable mode, is one of the three main modes of operation in Cisco IOS. It is the mode you enter after logging into a Cisco device in user exec mode and issuing the command enable. In this mode, you have access to a much wider range of commands, including those that allow you to make changes to the device's configuration.
+
+In privileged exec mode, you have access to all commands that are available in user exec mode, as well as additional commands such as:
+
+- `configure terminal`: Enters global configuration mode, where you can make changes to the device's overall configuration.
+
+- `interface`: Enters interface configuration mode, where you can make changes to specific interfaces on the device.
+
+- `copy`: Allows you to copy files to and from the device's file system, such as copying a configuration file from a TFTP server to the device.
+
+- `debug`: Allows you to enable debugging on the device, which can be useful for troubleshooting.
+
+- `show running-config`: Displays the current, active configuration of the device.
+
+You can also enter other configuration modes such as line configuration mode, route-map configuration mode, policy-map configuration mode, etc.
+
+To enter privileged exec mode, you must first log into the device in user exec mode and then issue the command `enable`. By default, the enable password is the same as the user exec mode password, but it can be configured differently.
+
+Example:
+
+```sh
+Router> enable
+Password:
+Router#
+```
+
+You are now in privileged exec mode, indicated by the "#" prompt.
+
+```sh
+Router# configure terminal
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)# interface gigabitEthernet 0/0
+Router(config-if)# ip address 10.10.10.1 255.255.255.0
+Router(config-if)# no shutdown
+Router(config-if)# exit
+Router(config)# exit
+Router#
+```
+
+In this example, the user first enters privileged exec mode by using the `enable` command and the correct password. They then <span style="color:#d19a66">**enter global configuration mode by using the `configure terminal` command.**</span> Next, they enter interface configuration mode to configure an IP address and bring up the interface. Finally, they exit configuration mode by using the `exit` command.
+
+It is important to note that in privileged exec mode you have the ability to change the device's configuration, so it is important to be cautious and use the right commands, otherwise, it can cause problems in the network.
+
+<br>
+
+### 3. Global configuration mode
+
+Global configuration mode, also known as global config mode, is a sub-mode of privileged exec mode in Cisco IOS. It allows you to make changes to the overall configuration of a Cisco device, such as setting the device's hostname, configuring its interfaces, and defining routing protocols.
+
+To enter global configuration mode, you must first log into the device in privileged exec mode and then issue the command configure terminal. This command allows you to make changes to the device's configuration that will be applied globally, rather than to a specific interface or other sub-section of the device.
+
+Once in global configuration mode, you can use a variety of commands to configure the device. Some examples include:
+
+- `hostname`: Sets the hostname of the device.
+
+- `interface`: Enters interface configuration mode, where you can make changes to specific interfaces on the device, such as configuring IP addresses, enabling or disabling interfaces, etc.
+
+- `ip routing`: Enables IP routing on the device, which allows it to forward packets between different networks.
+
+- `line vty`: Enters line vty configuration mode, where you can configure settings for virtual terminal lines, such as setting the login and password requirements for remote access.
+
+- `no shutdown`: brings up or activates an interface or other feature that was previously shut down.
+
+- `router eigrp`: Enters EIGRP routing protocol configuration mode, where you can configure settings for the EIGRP routing protocol, such as setting the autonomous system number.
+
+Example:
+
+```sh
+Router# configure terminal
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)# hostname RouterA
+RouterA(config)# interface gigabitEthernet 0/0
+RouterA(config-if)# ip address 10.10.10.1 255.255.255.0
+RouterA(config-if)# no shutdown
+RouterA(config-if)# exit
+RouterA(config)# ip routing
+RouterA(config)# router eigrp 100
+RouterA(config-router)# network 10.0.0.0
+RouterA(config-router)# exit
+RouterA(config)# exit
+RouterA#
+```
+
+In this example, the user first enters global configuration mode by using the `configure terminal` command. They then set the hostname of the device to "RouterA" using the `hostname `command. Next, they enter interface configuration mode to configure IP address and bring up the interface. After that, they enable IP routing on the device using the `ip routing` command. Then, they enter EIGRP routing protocol configuration mode using the `router eigrp` command and set the network to 10.0.0.0. Finally, they exit configuration mode by using the `exit` command.
+
+It is important to note that any changes made in global configuration mode will take effect immediately, and it is recommended to test the changes in a lab environment before applying them to a production network.
+
+### 'Running-config' and the 'Startup-config'
+
+There are two main configuration files that are kept on a Cisco device: the running-config and the startup-config.
+
+1. `Running-config`: The running-config is the current, active configuration of the device. It is stored in the device's memory and is used to control the device's behavior. Any changes made to the running-config take effect immediately. The running-config can be viewed using the command show running-config.
+   Example:
+
+```sh
+Router# show running-config
+Building configuration...
+
+Current configuration : 983 bytes
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname RouterA
+!
+interface GigabitEthernet0/0
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+!
+ip routing
+!
+router eigrp 100
+ network 10.0.0.0
+!
+end
+```
+
+In this example, the user can see the current configuration of the RouterA including the hostname, interface configurations, IP routing, and EIGRP routing protocol.
+
+2. `Startup-config`: The startup-config is a copy of the running-config that is stored in non-volatile memory on the device, such as flash memory. This means that the startup-config will persist even if the device is rebooted or powered off. <span style="color:#d19a66">**The `startup-config` is loaded into the `running-config` when the device is first booted or when the command `reload` is issued.**</span> The startup-config can be viewed using the command show startup-config.
+
+Example:
+
+```sh
+Router# show startup-config
+Building configuration...
+
+Current configuration : 983 bytes
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname RouterA
+!
+interface GigabitEthernet0/0
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+!
+ip routing
+!
+router eigrp 100
+ network 10.0.0.0
+!
+end
+```
+
+In this example, the user can see that the startup-config is exactly the same as the running-config.
+
+It is important to regularly save the running-config to the startup-config using the command `copy running-config startup-config` or `write memory` in order to ensure that the device's configuration is not lost in the event of a power failure or reboot. This is a best practice to have a backup of the configuration and restore it if needed.
+
+<br>
+
+### Service Password Encryption
+
+The "service password-encryption" command is used on Cisco routers and switches to encrypt all plaintext passwords that are stored in the device's configuration file. This includes passwords for local user accounts, as well as passwords for remote access protocols such as Telnet and SSH.
+
+When a password is encrypted, it is transformed into a scrambled version of the original, making it more difficult for unauthorized users to read it if they gain access to the configuration file.
+
+Here's an example of how to use the "service password-encryption" command:
+
+```sh
+Router#configure terminal
+Router(config)#service password-encryption
+Router(config)#end
+```
+
+This will enable password encryption on the device. Once enabled, any new passwords that are set will be encrypted automatically.
+
+It's important to note that while this command can help to secure passwords, it is not a foolproof method of protection. Encrypted passwords can still be decrypted using specialized tools and techniques, so it's important to use strong, complex passwords and to use other security measures in conjunction with password encryption.
+
+<br>
+
+### Enable Secret
+
+The "enable secret" command in Cisco is used to set a password for the privileged EXEC mode (also known as enable mode) on a Cisco device. This password is used to restrict access to the device's privileged commands and features.
+
+When you set an enable secret password, it is encrypted using a one-way hashing algorithm and stored in the device's configuration file. Unlike the "enable password" command, the enable secret password is not displayed in the configuration file and is much more secure.
+
+Here's an example of how to use the "enable secret" command:
+
+```sh
+Router#configure terminal
+Router(config)#enable secret cisco
+Router(config)#end
+```
+
+This will set the enable secret password to "cisco".
+
+It's important to note that the "enable secret" password takes precedence over the "enable password" command. If both are set, the "enable secret" password is used for authentication.
+
+Additionally, "enable secret" command also support the use of type 5 and type 8 encryption. Type 5 is considered as the most secured encryption which is the SHA-256 algorithm, Type 8 uses the PBKDF2 algorithm.
+
+For example:
+
+```sh
+Router#configure terminal
+Router(config)#enable secret 5 $1$jGq7$Mg.8nhFVu/fBz/7bRc/
+Router(config)#end
+```
+
+This will set the enable secret password with type 5 encryption using the hashed value provided.
+
+It's important to mention that the enable secret command is not reversible, meaning the original password cannot be retrieved once it is set. Therefore, it is important to keep a record of the password in a secure location.
