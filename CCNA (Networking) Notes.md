@@ -185,7 +185,418 @@ In summary, as data is transmitted through the network, each layer of the OSI mo
 
 # TCP/IP Suite
 
-!["TCP/IP Stack"](/IP_stack_connections.svg)
+<div>
+
+<img style="background-color:#ddd;" src="./IP_stack_connections.svg" alt="TCP IP Stack" />
+
+</div>
+
+---
+
+# Ethernet LAN Switching
+
+### Local Area Network (LAN)
+
+A Local Area Network (LAN) is a group of interconnected devices that share a common communication protocol and are located in a relatively small geographic area, such as a single building or campus. LANs allow devices to communicate and share resources, such as files and printers, within the network.
+
+A LAN is typically composed of a number of devices, including computers, servers, switches, routers, and other network devices. These devices are connected to each other using a variety of technologies, such as Ethernet, Wi-Fi, or Token Ring.
+
+There are several types of LANs, each with its own characteristics and use cases. Some examples of LANs include:
+
+- `Ethernet LAN`: This is the most common type of LAN, and it uses the Ethernet protocol to connect devices. Ethernet LANs are used in homes, small businesses, and large enterprises. They can be connected using wired or wireless technologies.
+
+- `Wireless LAN (WLAN)`: This type of LAN uses wireless technology, such as Wi-Fi, to connect devices. Wireless LANs are becoming increasingly popular in homes, businesses, and public spaces, such as airports and coffee shops.
+
+- `Token Ring LAN`: This type of LAN uses the Token Ring protocol to connect devices. Token Ring LANs are less common than Ethernet LANs, but they are still used in some industrial and military applications.
+
+- `Peer-to-peer LAN`: This is a type of LAN in which each device can act as both a client and a server, allowing users to share files and resources without the need for a central server.
+
+- `Client-Server LAN`: This is a type of LAN in which a central server manages and controls network resources, such as files, printers and other devices.
+
+Each LAN has its own advantages and disadvantages and is used in different scenarios, for example, Ethernet LANs are widely used in small businesses and homes, while Wireless LANs
+
+<br>
+
+### Ethernet Frame
+
+!["Ethernet Frame"](/Ethernet%20frame.png)
+
+- `Preamble (10101010 * 7) & SFD (10101011)`: They are used for synchronization and error detection purposes.
+
+  The preamble is a 7-byte field that is used to synchronize the clocks of the transmitting and receiving devices. It is a pattern of alternating 1s and 0s (10101010) that serves as a "wake-up" signal to the receiving device, letting it know that a frame is about to be sent. This allows the receiving device to adjust its clock and be ready to receive the incoming frame.
+
+  <span style="color:#d19a66">**In Ethernet, synchronizing clocks refers to the process of ensuring that the clocks of the transmitting and receiving devices are in sync. This is important because it ensures that the data being sent is received at the correct time and in the correct order.**</span>
+
+  <span style="color:#d19a66">**The Start Frame Delimiter (SFD) is a 1-byte field that is used to mark the beginning of the actual data (payload) in an Ethernet frame.**</span> It is used to ensure that the receiving device is able to accurately detect the start of the frame, even in the presence of noise or other errors.
+
+  the Start Frame Delimiter (SFD) is used to mark the beginning of the actual data (payload) in the frame. It serves as a marker that tells the receiving device exactly where the payload of the frame begins and where the header information ends.
+
+  An example of how the preamble and SFD are used in an Ethernet frame:
+
+  A device wants to send an Ethernet frame to another device on the network. The frame contains the data "Hello World" as the payload. The sender first sends the preamble (10101010 10101010 10101010 10101010 10101010 10101010 10101010) to the receiver, this is a wake-up signal to the receiver, letting it know that a frame is about to be sent, the receiver adjusts its clock accordingly. After that, the sender sends the SFD (10101011) which marks the start of the actual data (payload). The sender then sends the payload "Hello World" and the rest of the Ethernet frame, including the destination and source MAC addresses, type/length, FCS and other fields.
+
+  In summary, the preamble is a 7-byte field that is used to synchronize the clocks of the transmitting and receiving devices, and the SFD is a 1-byte field that is used to mark the beginning of the actual data (payload) in an Ethernet frame, this ensures that the receiving device is able to accurately detect the start of the frame, even in the presence of noise or other errors.
+
+  <br>
+
+- `Destination (6-byte) & Source (6-byte)`: In an Ethernet frame, the destination and source fields are used to identify the devices that are sending and receiving the data.
+
+  The destination field, also called the Destination MAC Address, is a 6-byte field that contains the MAC (Media Access Control) address of the device to which the data is being sent. The MAC address is a unique identifier assigned to each device on a network, and it is used to identify the device at the Data Link Layer (layer 2) of the OSI model.
+
+  The source field, also called the Source MAC Address, is a 6-byte field that contains the MAC address of the device that is sending the data. This allows the receiving device to identify the source of the data and respond accordingly.
+
+  For example, if a device with the MAC address 00:11:22:33:44:55 wants to send data to another device with the MAC address 66:77:88:99:AA:BB, the sender would include the destination MAC address (66:77:88:99:AA:BB) in the destination field of the Ethernet frame, and its own MAC address (00:11:22:33:44:55) in the source field. The receiving device would then use the destination MAC address to determine that the data is intended for it, and it would use the source MAC address to know the identity of the sender.
+
+  In summary, the destination and source fields in an Ethernet frame are used to identify the devices that are sending and receiving the data, the destination field contains the MAC address of the device to which the data is being sent and the source field contains the MAC address of the device that is sending the data. This allows the receiving device to identify the source of the data and respond accordingly.
+
+  <br>
+
+- `Type (2-byte) or Length (2-byte)`: In an Ethernet frame, the "Type" or "Length" field is used to indicate the type of data that is contained in the payload of the frame or the length of the payload.
+
+  !["Type & Length Fields"](/Type%20%26%20Length%20Fields.png)
+
+  When the field is called "Type", it is a 2-byte field that indicates the type of data that is contained in the payload. <span style="color:#d19a66">**This field is used to identify the upper-layer protocol that is being used to transport the data. For example, the value `0x0800` indicates that the payload contains an IP packet, and the value `0x0806` indicates that the payload contains an ARP packet.**</span>
+
+  When the field is called "Length", it is a 2-byte field that indicates the length of the payload in bytes. This field is used to identify the size of the payload, this information is useful for the receiving device to allocate the appropriate buffer size to receive the data.
+
+  In some cases, the "Type" or "Length" field can also be used to indicate the priority of the packet, which is useful for Quality of Service (QoS) purposes.
+
+  For example, if a device wants to send an Ethernet frame containing an IP packet with a payload of 1000 bytes, it would include the value 0x0800 in the "Type" field to indicate that the payload contains an IP packet and the value 1000 in the "Length" field to indicate the size of the payload.
+
+  In summary, the "Type" or "Length" field in an Ethernet frame is used to indicate the type of data that is contained in the payload of the frame or the length of the payload.
+
+  <br>
+
+- `FCS (4-byte)`: The FCS (Frame Check Sequence) field in an Ethernet frame is used to detect errors in the data that is being transmitted. <span style="color:#d19a66">**The FCS field is a 32-bit cyclic redundancy check (CRC) value that is calculated by the sender and appended to the end of the Ethernet frame. The receiver then recalculates the FCS value and compares it to the value received in the frame. If the values match, it indicates that the frame was transmitted without errors.**</span>
+
+  CRC (Cyclic Redundancy Check) is a type of error-detecting code commonly used in digital networks and storage devices to detect accidental changes to raw data. It is based on a mathematical algorithm that generates a fixed-size bit string, called a check value or CRC, for a given data. The check value is then appended to the data and transmitted. The receiver can then recalculate the check value for the received data and compare it to the check value received in the transmission. If the values match, it indicates that the data was transmitted without errors.
+
+  Here is an example of how a CRC value is calculated for a given data:
+
+  Consider a data of "Hello World"
+  The data is represented in binary form as 01001000 01100101 01101100 01101100 01101111 00101100 01110111 01101111 01101110 01100101 01101100 01100100
+  A standard polynomial function is used to calculate the CRC value, for example, the function is x^3+x+1
+  The data is divided into k bit segments, where k is the degree of the polynomial function
+  The segments are then multiplied by x^3 and added together to form a new polynomial
+  The new polynomial is then divided by the standard polynomial function and the remainder is the CRC value.
+  In this example, the data "Hello World" was divided into 8-bit segments and multiplied by x^3 and the remainder obtained is the CRC value, that is appended to the data and sent across the network.
+
+  It's worth noting that there are many different algorithms used to calculate CRC values and different standard polynomial function can be used based on the specific application. Also, the degree of the polynomial function can also vary, depending on the specific application and the level of error detection required.
+
+  An example of how the FCS field works:
+
+  1. A sender wants to transmit an Ethernet frame containing data "Hello World"
+
+  2. The sender calculates the 32-bit FCS value for the data using a specific mathematical algorithm
+
+  3. The FCS value is then appended to the end of the Ethernet frame, and the frame with the data and FCS value is transmitted
+
+  4. The receiver receives the frame and recalculates the FCS value for the received data
+
+  5. If the calculated FCS value by the receiver matches the FCS value received in the frame, the receiver concludes that the data was transmitted without errors
+
+  6. If the calculated FCS value by the receiver does not match the FCS value received in the frame, the receiver concludes that an error occurred during transmission and discards the frame
+
+  This is a basic example of how the FCS field is used to detect errors in Ethernet frames. Note that FCS field is used to detect errors but not to correct them.
+
+<br>
+
+### MAC Address
+
+!["MAC Address Simulation"](/MAC%20address%20simulation.png)
+
+A MAC (Media Access Control) address is a unique identifier assigned to network interfaces for communications on the physical network segment. <span style="color:#d19a66">**It is a 12-character hexadecimal string**</span> that is used to identify the source and destination of packets on a network. A MAC address is also known as a hardware address or physical address.
+
+Written as 12 **hexadecimal** characters.
+
+A MAC address is typically composed of two parts: the first part is called the organizationally unique identifier (OUI), which identifies the manufacturer of the network interface card (NIC), and the second part is the device identifier, which identifies the specific NIC within the manufacturer's product line.
+
+An example of a MAC address is "00:11:22:33:44:55." The first three octets (00:11:22) represent the OUI, **which is assigned by the IEEE to the NIC manufacturer**, and the last three octets (33:44:55) represent the device identifier.
+
+MAC addresses are used in the Media Access Control protocol, which is a communication protocol used in networks that conform to the OSI model. Each device connected to a network has a unique MAC address, which is used to identify the device and the source and destination of packets on the network.
+
+MAC addresses are used in many different types of networks, including Ethernet networks, Wi-Fi networks, and Bluetooth networks. They are also used in other communication protocols such as Token Ring and FDDI.
+
+In summary, A MAC address is a unique identifier assigned to network interfaces, it is used to identify the devices and the source and destination of packets on a network. It is a 12-character hexadecimal string that is composed of two parts; the first part is the OUI, assigned by IEEE to the NIC manufacturer, and the second part is the device identifier. It is used in many different types of networks, including Ethernet, Wi-Fi, and Bluetooth networks.
+
+### MAC (Media Access Control) Address Table or CAM (Content Addressable Memory) Table
+
+!["MAC Address Table"](/MAC%20address%20dynamically%20learned.png)
+
+<span style="color:#d19a66">**A MAC address table, also known as a forwarding table or content-addressable memory (CAM) table, is a data structure used by network devices such as switches and routers to store and retrieve the MAC addresses of devices connected to the network.**</span> The table is used to map the MAC addresses of devices to their corresponding network interfaces, which allows the device to forward packets to the correct destination.
+
+MAC addresses can be learned by a network device in two ways:
+
+1. `Dynamically learned`: <span style="color:#d19a66">**A device learns the MAC addresses of other devices on the network by observing the source MAC address of incoming packets.**</span> The device adds the source MAC address and its corresponding port to the MAC address table. This is known as dynamic address learning, and it is done automatically by the device.
+
+> Note: Dynamic MAC addresses are removed from The MAC address table after 5 minutes of inactivity.
+
+For example, when a device A sends a packet to a device B, the switch receives the packet and learns the MAC address of device A, it maps the MAC address of device A to the port where it received the packet from.
+
+2. `Static learned`: A device administrator can manually configure the MAC addresses and their corresponding ports in the MAC address table. This is known as static address learning.
+
+For example, an administrator can configure the MAC address of a device C and map it to a specific port, this way the switch will always forward the packets addressed to device C to the specific port.
+
+Static learning is useful for devices that do not support dynamic learning, or for devices that are not supposed to move around the network.
+
+In summary, A MAC address table is a data structure used by network devices to store and retrieve the MAC addresses of devices connected to the network. The table is used to map the MAC addresses of devices to their corresponding network interfaces, which allows the device to forward packets to the correct destination. There are two ways to learn the MAC address: Dynamically learned and statically learned. Dynamically learned is done automatically by the device by observing the source MAC address of incoming packets and statically learned is done manually by the administrator.
+
+<br>
+
+### Flood Frame
+
+When a switch receives a frame with an <span style="color:#d19a66">**unknown destination MAC address**</span>, it will flood the frame to all connected devices on the network. **Flooding is a mechanism used by switches to ensure that a frame reaches its intended destination even if the destination MAC address is not known.**
+
+The process of flooding a frame typically works as follows:
+
+1. The switch receives a frame with an unknown destination MAC address.
+
+2. The switch checks its MAC address table to see if the destination address is in it, but since the destination address is not in the table, <span style="color:#d19a66">**the switch considers it as an unknown unicast frame.**</span>
+
+3. The switch then floods the frame to all connected devices on the network, except for the port where the frame was received.
+
+4. Each device on the network receives the frame and checks the destination MAC address.
+
+5. If the destination MAC address matches the device's own MAC address, the device will process the frame.
+
+6. If the destination MAC address does not match the device's own MAC address, the device will discard the frame.
+
+For example: A device A sends a packet to Device C. Device C is not currently connected to the network or the MAC address of Device C is incorrect. The switch receives the packet and checks its MAC address table to see if the destination address is in it, but since the destination address is not in the table, the switch floods the frame to all connected devices on the network, except for the port where the frame was received. Each device on the network receives the frame and checks the destination MAC address, if the destination MAC address matches the device's own MAC address, the device will process the frame otherwise it will discard the frame.
+
+<span style="color:#d19a66">**It's worth noting that Flooding is a normal process of operation in a switched LAN, but it can lead to network congestion and bandwidth wastage if it happens too often. To prevent flooding, switches use techniques such as learning the MAC addresses of devices on the network and updating the MAC address table dynamically.**</span>
+
+In summary, When a switch receives a frame with an unknown destination MAC address, it will flood the frame to all connected devices on the network. Flooding is a mechanism used by switches to ensure that a frame reaches its intended destination even if the destination MAC address is not known. Each device on the network receives the frame and checks the destination MAC address. If the destination MAC address matches the device's own MAC address, the device will process the frame otherwise it will discard the frame. Flooding can lead to network congestion and bandwidth wastage if it happens too often, to prevent flooding, switches use techniques such as learning the MAC addresses of devices on the network and updating the MAC address table dynamically.
+
+<br>
+
+### Flooding frame VS Broadcasting frame
+
+Flooding and broadcasting are similar in that both involve sending a frame to multiple devices on a network, but there are some key differences between the two:
+
+- `Flooding` is a mechanism used by switches to ensure that a frame reaches its intended destination even if the destination MAC address is not known. When a switch receives a frame with an unknown destination MAC address, it will flood the frame to all connected devices on the network, except for the port where the frame was received. The goal is to get the frame to its intended destination by allowing all devices on the network to process it, and the packet is discarded if the destination address doesn't match.
+
+- `Broadcasting`, on the other hand, is a mechanism used to send a frame to all devices on a network. <span style="color:#d19a66">**The destination address in a broadcast frame is a special address that is recognized by all devices on the network, such as the broadcast address 255.255.255.255. The goal is to reach all the devices on the network, and the packet is processed by all the devices.**</span>
+
+In summary, Flooding and broadcasting are similar in that both involve sending a frame to multiple devices on a network, but there are key differences between them. Flooding is a mechanism used by switches to ensure that a frame reaches its intended destination even if the destination MAC address is not known. Broadcasting, on the other hand, is a mechanism used to send a frame to all devices on a network, the goal is to reach all the devices on the network.
+
+### Some Important Notes of Ethernet Frame
+
+- The <span style="color:#d19a66">**Preamble + SFD**</span> is usually not considered part of the Ethernet header.
+
+- Therefore the size of the Ethernet header + trailer is 18 bytes (6 + 6 + 2 + 4).
+
+- The minimum size for an Ethernet frame (Header + Payload(Packet) + Trailer) is <span style="color:#d19a66">**64 bytes**</span>.
+
+- <span style="color:#d19a66">**64 bytes - 18 bytes**</span> (header + trailer size) = 46 bytes
+
+- Therefore the minimum payload (packet) size is 46 bytes.
+
+- if the payload is <span style="color:#d19a66">**less than 46 bytes**</span>, padding bytes are added.
+
+  e.g 34-byte packet + 12-byte padding (will be added) = 46 bytes
+
+- [Watch Ethernet LAN switching simulation](https://www.youtube.com/watch?v=5q1pqdmdPjo&list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ&index=11)
+
+<br>
+
+### ARP (Address Resolution Protocol)
+
+!["Address Resolution Protocol Request"](/ARP%20Request.png)
+
+!["Address Resolution Protocol Reply"](/ARP%20Reply.png)
+
+<span style="color:#d19a66">**ARP (Address Resolution Protocol) is a protocol used to map an IP address to a physical (MAC) address on a local network. It is used to determine the hardware address of a device on a network, when only its IP address is known.**</span>
+
+When a device on a network wants to communicate with another device, it first needs to determine the MAC address of the destination device. The device sends out an ARP request packet, which is broadcast to all devices on the local network. The packet contains the IP address of the destination device.
+
+The device with the matching IP address responds with an ARP reply packet, which contains its MAC address. The requesting device can then use this information to send data packets directly to the destination device.
+
+For example, let's say device A (192.168.1.2) wants to communicate with device B (192.168.1.3). Device A will send an ARP request packet to the local network, with the destination IP address of 192.168.1.3. Device B receives the packet and recognizes that its IP address is included in the request, so it responds with its own MAC address, which is 00:11:22:33:44:55. Device A can now use this information to send data packets directly to Device B using the MAC address 00:11:22:33:44:55.
+
+- <span style="color:#d19a66">**ARP Request**</span> is <span style="color:#d19a66">**broadcast**</span> = sent to all hosts on the network.
+
+- <span style="color:#d19a66">**ARP Reply**</span> is <span style="color:#d19a66">**unicast**</span> = sent only to one host (the host that sent the request) on the network.
+
+<br>
+
+### Broadcast MAC Address (FF:FF:FF:FF:FF:FF)
+
+A broadcast MAC address is a special type of MAC address that is used to send data packets to all devices on a local network. The broadcast MAC address is typically represented by the hexadecimal value FF:FF:FF:FF:FF:FF.
+
+In Ethernet networks, when a device wants to send a broadcast packet, it will set the destination MAC address to the broadcast address (FF:FF:FF:FF:FF:FF) and the packet will be sent to all devices on the local network.
+
+Broadcast packets are used for various network protocols and services such as Address Resolution Protocol (ARP) requests, Internet Control Message Protocol (ICMP) packets, and Dynamic Host Configuration Protocol (DHCP) requests.
+
+For example, let's say a device wants to discover all devices on the local network, it will broadcast an ARP request packet with the destination MAC address set to the broadcast address (FF:FF:FF:FF:FF:FF). All devices on the local network will receive the packet, and the devices with matching IP addresses will respond with their own MAC addresses.
+
+Another example, DHCP is a protocol that allows devices to automatically obtain an IP address from a DHCP server on the network. When a device connects to the network for the first time, it will broadcast a DHCP request packet with the destination MAC address set to the broadcast address (FF:FF:FF:FF:FF:FF). This packet will be received by all devices on the local network, including the DHCP server. The DHCP server will respond with an offer of an IP address, and the device can then use this IP address to communicate on the network.
+
+It's worth noting that broadcast packets are not forwarded by routers, they are only intended to be received by devices on the same network segment.
+
+<br>
+
+### How 'switch' respond on 'ARP request' and 'ARP reply'
+
+An ARP request packet is considered an "unknown unicast" frame by a switch because the destination MAC address in the packet is not yet known to the switch. A unicast frame is a frame that is sent to a single destination, whereas a broadcast frame is sent to all devices on the local network.
+
+When a switch receives an ARP request packet, it will flood the packet out all of its ports except the port on which it was received, in an attempt to find the device with the matching IP address. This is because the switch does not yet know the MAC address of the device with the IP address specified in the packet, so it sends the packet to all devices on the network in the hope that the device with the matching IP address will respond.
+
+When the device with the matching IP address responds with its own ARP reply packet, the switch will learn the device's MAC address and update its MAC address table. The switch will then use this information to forward any subsequent frames destined for that device directly to the appropriate port, rather than flooding them out all ports. This is known as a "known unicast" frame.
+
+As for the broadcast MAC address, it is used by switches to identify broadcast frames, which are intended for all devices on the local network. When a switch receives a frame with a destination MAC address of FF:FF:FF:FF:FF:FF, it will flood the frame out all of its ports, as the frame is intended for all devices on the network.
+
+For example, let's say a host A wants to communicate with a host B. Host A sends an ARP request packet to the switch with destination IP address of Host B. The switch doesn't have Host B's MAC address in its MAC address table, so it floods the packet out all of its ports. Host B receives the packet and responds with an ARP reply packet. The switch receives the packet and updates its MAC address table with Host B's MAC address. Now the switch knows that any packet with destination IP address of host B should be sent to the port connected to host B.
+
+<br>
+
+### PING
+
+Ping (Packet Internet Groper) is a network troubleshooting tool that is used to test the reachability of a device on an Internet Protocol (IP) network. It works by sending a series of Internet Control Message Protocol (ICMP) echo request packets to a specified destination IP address, and then listening for ICMP echo reply packets to be returned.
+
+When you run the "ping" command on your computer, it sends an ICMP echo request packet to the specified IP address. The destination device, if it is online and reachable, will respond with an ICMP echo reply packet. The ping command then reports the time it took for the reply packet to be received (also known as the round-trip time or RTT).
+
+The ping command can be used to determine if a device is online and reachable, and to measure the network latency between two devices. It can also be used to test the reachability of a specific IP address or domain name, or to troubleshoot network connectivity issues.
+
+For example, let's say that you want to test the reachability of a device with the IP address 192.168.1.1. You would open a command prompt on your computer and run the following command:
+
+```sh
+ping 192.168.1.1
+```
+
+The ping command will then send a series of echo request packets to the IP address 192.168.1.1. The destination device will respond with echo reply packets, and the ping command will display the results, which will include the number of packets sent and received, the minimum, maximum and average round-trip time and the packet loss rate.
+
+> Note: It's worth noting that while ping is a very useful tool for network troubleshooting, it is not foolproof. Some devices may be configured to ignore ICMP echo request packets, or may be located behind a firewall that blocks them. Additionally, Ping can be blocked by firewalls or other security devices to prevent malicious activity.
+
+#### Output from the "ping" command
+
+```sh
+C:\> ping 192.168.1.1
+
+Pinging 192.168.1.1 with 32 bytes of data:
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=2ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64
+
+Ping statistics for 192.168.1.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms
+```
+
+The output shows that the ping command sent four echo request packets to the IP address 192.168.1.1, and received four echo reply packets in response. The round-trip time (RTT) for each packet is displayed in milliseconds, along with the minimum, maximum, and average RTT. The output also shows that there was 0% packet loss, which means all packets sent were successfully received.
+
+<br>
+
+If the host is not reachable, the output would look like this:
+
+```sh
+C:\> ping 192.168.1.1
+
+Pinging 192.168.1.1 with 32 bytes of data:
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 192.168.1.1:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+```
+
+In this case, the host is not reachable and all the packets sent were lost (100% loss), and the request timed out.
+
+It's worth noting that the output may slightly vary depending on the Operating System you are using.
+
+<br>
+
+### MAC (Media Access Control) address table
+
+A MAC (Media Access Control) address table, also known as a content-addressable memory (CAM) table, is a database used by network switches to store and retrieve the MAC addresses of devices that are connected to the switch. The switch uses the MAC address table to determine the physical location (port) of a device on the network, so that it can forward data packets to the correct port.
+
+Each entry in the MAC address table contains the following information:
+
+- The MAC address of the device
+- The port on the switch to which the device is connected
+- A timestamp indicating when the entry was last updated
+
+When a switch receives a data packet, it examines the destination MAC address in the packet's header, and looks up the corresponding port in its MAC address table. If the MAC address is found in the table, the switch will forward the packet directly to the correct port. This process is called unicasting.
+
+If the MAC address is not found in the table, the switch will forward the packet to all ports on the network, a process known as flooding. This is done in order to ensure that the packet reaches its intended destination, even if the switch doesn't yet have the MAC address in its table.
+
+The switch also learns the MAC addresses of devices on the network as they communicate. When a device sends a data packet, the switch will add the source MAC address and the port on which the packet was received to its MAC address table. This process is called learning.
+
+For example, let's say that there are two devices, A and B, connected to a switch. When device A wants to communicate with device B, it sends a data packet with the destination MAC address of device B. The switch receives the packet and looks up the MAC address in its MAC address table. Since the switch has not yet learned the MAC address of device B, it floods the packet out all of its ports. Device B receives the packet and responds with its own data packet. The switch receives the packet and learns the MAC address of device B and the port it is connected to. Now the switch knows that any packet with destination MAC address of device B should be sent to the port connected to device B.
+
+<br>
+
+### AGING (Address aging)
+
+AGING (Address aging) is a feature of Cisco devices that allows the switch to automatically remove stale entries from its MAC address table. As devices come and go on the network, the switch may accumulate a large number of entries in its MAC address table that are no longer valid. AGING helps to keep the table from becoming too large and ensures that the switch is not forwarding packets to non-existent devices.
+
+Each entry in the MAC address table has a timestamp that indicates when the entry was last updated.<span style="color:#d19a66">**When AGING is enabled, the switch periodically checks the timestamp of each entry and c ompares it to the AGING time configured on the switch. If the timestamp is older than the AGING time, the switch will remove the entry from the table.**</span>
+
+For example, a switch is configured with an AGING time of 5 minutes. If a device connects to the switch and sends a packet, the switch will add the device's MAC address to its MAC address table with a timestamp. If the device does not send any more packets for 5 minutes or more, the switch will remove the device's entry from the table.
+
+AGING can be configured on a per-port basis or globally on the switch. It can also be disabled if desired. AGING helps in keeping the MAC address table up-to-date and prevent the table from becoming too large by removing stale entries, which can improve the switch performance and prevent from potential security threats.
+
+<br>
+
+### Clear The MAC Address Table
+
+There are several ways to clear the MAC address table on a Cisco device, depending on the device and the version of software it is running. Here are some common options:
+
+1. The "clear mac-address-table" command: This command is used to clear the MAC address table on a switch. It can be used to clear the entire table or to clear specific entries based on the MAC address or interface.
+
+Example:
+
+```sh
+switch# clear mac-address-table
+```
+
+<br>
+
+2. The "clear mac address-table dynamic" command: This command is used to clear only dynamic entries in the MAC address table. It will not remove static entries that have been manually configured.
+
+Example:
+
+```sh
+switch# clear mac address-table dynamic
+```
+
+<br>
+
+3. The "clear mac-address-table address <mac-address>" command: This command is used to clear a specific entry in the MAC address table based on the MAC address.
+
+Example:
+
+```sh
+switch# clear mac-address-table address 0011.2233.4455
+```
+
+<br>
+
+4. The "clear mac-address-table interface <interface>" command: This command is used to clear all entries associated with a specific interface in the MAC address table.
+
+Example:
+
+```sh
+switch# clear mac-address-table interface fastEthernet 0/1
+```
+
+<br>
+
+5. The "erase startup-config" command: This command is used to erase the startup configuration of the switch and reload it to factory defaults. This will clear the entire MAC address table, along with all other configuration settings.
+
+Example:
+
+```sh
+switch# erase startup-config
+```
+
+It's worth noting that when you clear the MAC address table, the switch will have to relearn the MAC addresses of devices on the network, which may cause temporary disruption in network connectivity.
+It's always recommended to save the configuration before doing any modifications and verify the changes before applying them
+
+<br>
 
 ---
 
@@ -195,7 +606,7 @@ In summary, as data is transmitted through the network, each layer of the OSI mo
 
 The notation "192.168.1.0/24" and "192.168.2.0/24" are examples of CIDR (Classless Inter-Domain Routing) notation, which is used to specify the IP address range and the subnet mask of a network.
 
-The IP address "192.168.1.0" is the first address in the range of IP addresses that make up the network, and the number "24" following the "/" symbol is the subnet mask. The subnet mask is used to determine the number of bits that make up the network portion of the IP address, and the remaining bits make up the host portion of the IP address.
+The IP address "192.168.1.0" is the first address in the range of IP addresses that make up the network, and the number "24" following the "/" symbol is the subnet mask. <span style="color:#d19a66">**The subnet mask is used to determine the number of bits that make up the network portion of the IP address, and the remaining bits make up the host portion of the IP address.**</span>
 
 In the case of "192.168.1.0/24", the first 24 bits of the IP address are used to define the network portion of the address, and the remaining 8 bits are used to define the host portion of the address. This means that the network can contain up to 256 possible IP addresses (2^8 = 256), with the range of IP addresses being "192.168.1.0" to "192.168.1.255".
 
@@ -229,7 +640,7 @@ In summary, routers use multiple IP addresses to connect and route traffic betwe
 
 !["IPv4 Addresses"](/IPv4%20Addresses.png)
 
-IPv4 addresses are 32-bit binary numbers that are typically represented in decimal format using the dot-decimal notation. Each decimal number in an IPv4 address, also known as an octet, is between 0 and 255. The four octets of an IPv4 address are separated by dots and represent the network and host portions of the address.
+<span style="color:#d19a66">**IPv4 addresses are 32-bit binary numbers that are typically represented in decimal format using the dot-decimal notation.**</span> Each decimal number in an IPv4 address, also known as an octet, is between 0 and 255. The four octets of an IPv4 address are separated by dots and represent the network and host portions of the address.
 
 ### IPv4 address Classes
 
@@ -240,6 +651,8 @@ IPv4 addresses are divided into five classes: A, B, C, D, and E. Each class has 
 !["IPv4 Address Classes"](/IPv4%20Addresses%20Classes.png)
 
 !["IPv4 Address Classes"](/class-a-b-c.png)
+
+!["Maximum hosts per network"](/maximum-hosts-per-network.png)
 
 !["IPv4 Address Classes Chart"](/IPv4-classes-chart.png)
 
@@ -276,6 +689,14 @@ Additionally, Loopback address is used in some applications and protocols to bin
 In summary, loopback addresses are a useful tool for testing the basic functionality of a device's network interface and TCP/IP stack, and also used in some applications and protocols to bind to the localhost or loopback interface for security reason.
 
 > Note: The first address in each network is the <span style="color:#d19a66; font-weight:medium">"Network address"</span>, it can't be assigned to hosts. Also the last address of the network is the <span style="color:#d19a66; font-weight:medium">"Broadcast address"</span>, the Layer 3 address used when you want to send traffic to all hosts. It also can't be assigned to hosts.
+
+<br>
+
+### First/Last Usable Address
+
+!["First/Last Usable Address"](/first-last-usable-address.png)
+
+<br>
 
 ---
 
@@ -344,7 +765,7 @@ Router#
 
 In this example, the user first enters privileged exec mode by using the `enable` command and the correct password. They then <span style="color:#d19a66">**enter global configuration mode by using the `configure terminal` command.**</span> Next, they enter interface configuration mode to configure an IP address and bring up the interface. Finally, they exit configuration mode by using the `exit` command.
 
-It is important to note that in privileged exec mode you have the ability to change the device's configuration, so it is important to be cautious and use the right commands, otherwise, it can cause problems in the network.
+> It is important to note that in privileged exec mode you have the ability to change the device's configuration, so it is important to be cautious and use the right commands, otherwise, it can cause problems in the network.
 
 <br>
 
@@ -388,7 +809,7 @@ RouterA#
 
 In this example, the user first enters global configuration mode by using the `configure terminal` command. They then set the hostname of the device to "RouterA" using the `hostname `command. Next, they enter interface configuration mode to configure IP address and bring up the interface. After that, they enable IP routing on the device using the `ip routing` command. Then, they enter EIGRP routing protocol configuration mode using the `router eigrp` command and set the network to 10.0.0.0. Finally, they exit configuration mode by using the `exit` command.
 
-It is important to note that any changes made in global configuration mode will take effect immediately, and it is recommended to test the changes in a lab environment before applying them to a production network.
+> It is important to note that any changes made in global configuration mode will take effect immediately, and it is recommended to test the changes in a lab environment before applying them to a production network.
 
 ### 'Running-config' and the 'Startup-config'
 
@@ -465,7 +886,7 @@ The "service password-encryption" command is used on Cisco routers and switches 
 
 When a password is encrypted, it is transformed into a scrambled version of the original, making it more difficult for unauthorized users to read it if they gain access to the configuration file.
 
-Here's an example of how to use the "service password-encryption" command:
+Here's an example of how to use the `"service password-encryption"` command:
 
 ```sh
 Router#configure terminal
@@ -475,7 +896,7 @@ Router(config)#end
 
 This will enable password encryption on the device. Once enabled, any new passwords that are set will be encrypted automatically.
 
-It's important to note that while this command can help to secure passwords, it is not a foolproof method of protection. Encrypted passwords can still be decrypted using specialized tools and techniques, so it's important to use strong, complex passwords and to use other security measures in conjunction with password encryption.
+> It's important to note that while this command can help to secure passwords, it is not a foolproof method of protection. Encrypted passwords can still be decrypted using specialized tools and techniques, so it's important to use strong, complex passwords and to use other security measures in conjunction with password encryption.
 
 <br>
 
@@ -509,4 +930,59 @@ Router(config)#end
 
 This will set the enable secret password with type 5 encryption using the hashed value provided.
 
-It's important to mention that the enable secret command is not reversible, meaning the original password cannot be retrieved once it is set. Therefore, it is important to keep a record of the password in a secure location.
+> It's important to mention that the enable secret command is not reversible, meaning the original password cannot be retrieved once it is set. Therefore, it is important to keep a record of the password in a secure location.
+
+!["Service Password Encryption"](/service-password-encryption.png)
+
+<br>
+
+### Different types of encryption algorithms
+
+Cisco devices use different types of encryption algorithms to secure the plaintext passwords stored in their configuration. The main types of encryption that are used in Cisco devices are:
+
+1. `Type 0`: This is the default encryption type and does not encrypt the passwords at all. This means that any plaintext passwords stored in the configuration will be visible in clear text.
+
+Example:
+
+```sh
+router#config t
+router(config)#username admin password cisco
+```
+
+The above example is with type 0 encryption, where the password "cisco" is stored in clear text in the configuration.
+
+2. `Type 7`: This is a proprietary Cisco encryption algorithm that is not considered to be very secure. Type 7 encryption can easily be decrypted using various online tools.
+
+Example:
+
+```sh
+router#config t
+router(config)#service password-encryption
+router(config)#username admin password 7 05080F1A1B1C
+```
+
+The above example is with type 7 encryption, where the password "05080F1A1B1C" is the encrypted form of a plain text password.
+
+3. `Type 5 (SHA-256)`: This encryption type uses the SHA-256 (Secure Hash Algorithm 256-bit) to encrypt the passwords. This is considered to be a more secure encryption method compared to Type 7.
+
+Example:
+
+```sh
+router#config t
+router(config)#username admin password 5 $8$i5f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x
+```
+
+The above example is with type 5 encryption, where the password "$8$i5f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x" is the encrypted form of a plain text password using SHA-256 algorithm.
+
+4. `Type 6 (SHA-512)`: This encryption type uses the SHA-512 (Secure Hash Algorithm 512-bit) to encrypt the passwords. This is considered to be a more secure encryption method compared to Type 7 and Type 5.
+
+Example:
+
+```sh
+router#config t
+router(config)#username admin password 6 $9$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x
+```
+
+The above example is with type 6 encryption, where the password "$9$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x" is the encrypted form of a plain text password using SHA-512 algorithm.
+
+> It's important to note that Type 0 encryption is not recommended and it's better to use Type 5 or 6 encryption for password security.
