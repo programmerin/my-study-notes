@@ -191,6 +191,152 @@ In summary, as data is transmitted through the network, each layer of the OSI mo
 
 </div>
 
+<br>
+
+---
+
+# Interfaces and Cables
+
+**RJ-45 (RJ = Registered Jack)**
+
+The RJ-45 connector is used on the end of a copper Ethernet cable. There are Ethernet cables which do not use copper wiring as well.
+
+### What is Ethernet ?
+
+- Ethernet is a collection of network protocols/standards.
+
+Ethernet is a set of networking technologies that were developed in the 1970s by Robert Metcalfe and his team at Xerox Corporation's Palo Alto Research Center (PARC). The name "Ethernet" is derived from the concept of the "ether" as a medium for the transmission of light and other electromagnetic waves. The original Ethernet specification used a coaxial cable as the medium for data transmission, but today, Ethernet networks can use a variety of media, including twisted-pair cable, fiber-optic cable, and wireless.
+
+Ethernet operates at the Data Link Layer of the OSI model and uses the Media Access Control (MAC) protocol to regulate how devices access the shared medium and transmit data. The MAC protocol uses a technique called Carrier Sense Multiple Access with Collision Detection (CSMA/CD) to prevent multiple devices from transmitting at the same time and causing a collision.
+
+Ethernet networks can be divided into several categories based on the speed, cable type and distance. Some of the most common types of Ethernet are:
+
+1. `10Base-T`: This type of Ethernet uses twisted-pair cable and supports a speed of 10Mbps over a distance of 100 meters.
+
+2. `100Base-T`: This type of Ethernet uses twisted-pair cable and supports a speed of 100Mbps over a distance of 100 meters.
+
+3. `1000Base-T`: This type of Ethernet uses twisted-pair cable and supports a speed of 1000Mbps (1 Gbps) over a distance of 100 meters.
+
+4. `10 Gigabit Ethernet (10 GbE)`: This type of Ethernet uses multi-mode or single-mode fiber optic cable and supports a speed of 10 Gbps.
+
+5. `100 Gigabit Ethernet (100 GbE)`: This type of Ethernet uses multi-mode or single-mode fiber optic cable and supports a speed of 100 Gbps.
+
+Ethernet is used in a wide range of applications, from small home networks to large enterprise networks, and it's considered a backbone technology for many networks. It's used in many other applications such as industrial Ethernet, automotive Ethernet, and avionics Ethernet for example.
+
+For example, a small business network may use Ethernet to connect computers, servers, and printers together. A large enterprise network may use Ethernet to connect multiple buildings together and connect to the internet. An industrial Ethernet network may use Ethernet to connect industrial devices such as PLCs, sensors and actuators together in a factory.
+
+In summary, Ethernet is a widely-used networking technology that provides a standard way of transmitting data over a network. It operates at the Data Link Layer of the OSI model, uses the Media Access Control (MAC) protocol to regulate how devices access the shared medium and transmit data and has a wide range of applications and high speeds that support. The name "Ethernet" is derived from the concept of the "ether" as a medium for the transmission of light and other electromagnetic waves.
+
+<br>
+
+### Bits and Bytes
+
+!["Bits and Bytes"](/Bits%20and%20Bytes.png)
+
+A bit is a binary digit, the smallest unit of data in a computer. It has a single binary value of either 0 or 1. Bits are used to represent numbers, letters, and other characters in a computer.
+
+A byte is a unit of data storage that is made up of 8 bits. It can represent a number between 0 and 255 in decimal notation or between 00 and FF in hexadecimal notation. A byte is often used to represent a single character such as a letter or symbol in a computer's memory.
+
+For example, the letter "A" is represented by the binary code 01000001, which is one byte or 8 bits. A full-color image with high resolution would require multiple bytes to store all the information of each pixel.
+
+Another example is a digital music file, a 3-minute song with a bit rate of 320 kbps (kilobits per second) would be roughly 17.28 Megabytes (MB) in size, where 1MB is equal to 1024KB, and 1KB is equal to 1024bytes.
+
+In summary, a bit is the smallest unit of data in a computer, it can only hold a value of 0 or 1, while a byte is a unit of data storage that is made up of 8 bits and can hold a value between 0 and 255. Bytes are used to represent numbers, letters, and other characters in a computer's memory and are often used to store larger amounts of data such as images and music files.
+
+<br>
+
+### IEEE Ethernet Standards for copper ethernet cable
+
+!["Ethernet Standards defined in the IEEE"](/IEEE.png)
+
+!["Ethernet standards copper"](/Ethernet%20standards%20copper.png)
+
+<br>
+
+### UTP Cables
+
+!["Unshielded Twisted Pair cable"](/utp-cable.png)
+
+!["Number of wires in UTP cable"](/utp-cable-number-of-wires.png)
+
+UTP (Unshielded Twisted Pair) cables are a type of cable used for Ethernet networking. They consist of four pairs of copper wires that are twisted together to reduce electromagnetic interference (EMI) and crosstalk. Each pair of wires is used to transmit data in one direction, and the twisting helps to prevent interference between the pairs.
+
+UTP cables come in various categories, such as Cat5, Cat5e, Cat6, Cat6a, Cat7 and Cat8. Each category has specific standards that define the performance characteristics of the cable. For example,
+
+1. `Cat5`: This is an older cable standard that supports data transfer rates of up to 100 Mbps and a maximum cable length of 100 meters.
+
+2. `Cat5e`: This cable standard is an improvement over Cat5 and supports data transfer rates of up to 1000 Mbps and a maximum cable length of 100 meters.
+
+3. `Cat6`: This cable standard supports data transfer rates of up to 10 Gbps and a maximum cable length of 55 meters.
+
+4. `Cat6a`: This cable standard improves upon Cat6 and supports data transfer rates of up to 10 Gbps and a maximum cable length of 100 meters.
+
+5. `Cat7`: This cable standard supports data transfer rates of up to 10 Gbps and a maximum cable length of 100 meters.
+
+6. `Cat8`: This cable standard supports data transfer rates of up to 25 Gbps and a maximum cable length of 30 meters.
+
+UTP cables are commonly used in home and office networks, as they are relatively inexpensive and easy to install. They are typically terminated with RJ-45 connectors on each end and are used to connect devices such as computers, routers, and switches.
+
+It is important to choose the right category of UTP cable for a given network based on factors such as the required data transfer rate, cable length, and network distance.
+
+<br>
+
+### 1. PC to Switch or (Router to Switch)
+
+- Using <span style="color:#d19a66">**Straight-through Cable**</span>
+
+!["Full-Duplex UTP straight-through cable"](/full-duplex-utp-cable-10bast-T-100bast-T.png)
+
+<br>
+
+### 2. Router to Router, PC to PC, Switch to Switch
+
+- Using <span style="color:#d19a66">**Cross-Over Cable**</span>
+
+!["Full-Duplex UTP cross-over cable"](/full-duplex-utp-cable-10bast-T-100bast-T-cross-over-cable.png)
+
+<br>
+
+!["Devices pin table"](/devices-pin-table.png)
+
+<br>
+
+### Auto-MDI/MDIX (Medium Dependent Interface/Medium Dependent Interface Crossover)
+
+<span style="color:#d19a66">**"Most modern networking devices have evolved beyond having to worrry about 'straight-through' or 'cross-over' cables. That's because newer networking devices include a feature called 'Auto MDI-X'. Previously, if two switches were connected with a straight-through cable like this, they would be unable to communicate. However, Auto MDI-X allows devies to automatically detect which pins their neighbour is transmitting data on, and then adjust which pins they use to transmit and receive data. They can then exchange data normally."**</span>
+
+#### Auto MDI-X Exchanging Port Automatically
+
+!["Auto MDI-X"](/Auto-MDI-X.png)
+
+!["Auto MDI-X Ports"](/Auto-MDI-X%20Ports.jpg)
+
+Auto-MDI/MDIX (Medium Dependent Interface/Medium Dependent Interface Crossover) is a feature found on many modern Ethernet devices such as switches, routers, and network adapters. It allows the device to automatically detect the type of cable connected and configure the connection accordingly, eliminating the need for crossover cables in certain situations.
+
+When two devices are connected with a straight-through cable, they are typically configured to use different pin assignments on the connectors. One device uses the T568A pinout and the other device uses the T568B pinout. With Auto-MDI/MDIX, the device can automatically detect the pinout being used on the other device and adjust its own pinout accordingly, allowing the connection to work without the need for a crossover cable.
+
+For example, let's say you have a computer connected to a switch using a straight-through cable. The computer is using the T568B pinout and the switch is using the T568A pinout. With Auto-MDI/MDIX enabled on both devices, the switch will automatically detect the T568B pinout being used by the computer and adjust its own pinout to match, allowing the connection to work without the need for a crossover cable.
+
+Auto-MDI/MDIX can be a useful feature in situations where it's not clear which type of cable is being used, or if you don't have a crossover cable on hand. However, it's worth noting that this feature is not always present on all devices and some equipment may require a specific type of cable to work properly.
+
+In summary, Auto-MDI/MDIX is a useful feature that eliminates the need for crossover cables in certain situations, allowing network devices to automatically adjust their pinout and allowing communication between them.
+
+<br>
+
+### UTP Cables (1000BASE-T, 10GBASE-T)
+
+!["Bidirectional UTP cable"](/four-pairs-utp-cable-bidirectional.png)
+
+10GBase-T (10 Gigabit Base-T) is a standard for 10 Gbps Ethernet over twisted-pair copper cabling. <span style="color:#d19a66">**One of its key features is bidirectional communication, which allows data to be transmitted in both directions over the same pair of wires.**</span> This is achieved by using a technique called full-duplex communication, which enables the sending and receiving of data at the same time.
+
+In traditional Ethernet, data is transmitted in one direction at a time, using half-duplex communication. This means that the cable is used for sending data in one direction, and then for receiving data in the opposite direction. This can lead to delays and bottlenecks in the network.
+
+With bidirectional communication, data can be transmitted in both directions simultaneously, increasing the overall throughput of the network. This makes 10GBase-T a more efficient and faster option for high-bandwidth applications such as video streaming, cloud computing, and data backup.
+
+Bidirectional communication is possible in 10GBase-T due to the use of advanced modulation techniques and Forward Error Correction (FEC), which are used to optimize the signal quality and reduce the impact of noise and interference on the transmission. This allows 10GBase-T to transmit data over longer distances than other 10 Gbps Ethernet standards, such as 10GBase-SR (Short Reach), which is typically limited to short distances of up to 300 meters.
+
+<br>
+
 ---
 
 # Ethernet LAN Switching
@@ -694,7 +840,25 @@ In summary, loopback addresses are a useful tool for testing the basic functiona
 
 ### First/Last Usable Address
 
-!["First/Last Usable Address"](/first-last-usable-address.png)
+!["First/Last Usable Address for class C"](/first-last-usable-address.png)
+
+!["First/Last Usable Address for class B"](/first-and-last%20usable%20address%20for%20class%20b.png)
+
+- The first usable address is the network address(192.168.1.0/24) + 1. Add 1 by changing the last bit of the host portion to 1 (00000000 - 00000001) and you get 192.168.1.1/24
+
+- The last usable address is the broadcast address(192.168.1.255/24) - 1. Subtract 1 by from this address by switching the last bit to 0 (11111111 - 11111110), and you get 192.168.1.254/24, it is the last usable address.
+
+<br>
+
+### R1# show ip interface brief
+
+!["Router IP interface status"](/show-ip-interface-brief.png)
+
+<br>
+
+### SW1# show ip interface brief
+
+!["Switch IP interface status"](/switch-show-ip-interface-brief.png)
 
 <br>
 
@@ -986,3 +1150,78 @@ router(config)#username admin password 6 $9$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x$9
 The above example is with type 6 encryption, where the password "$9$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x$9f0Y7O5a$KjL5F8Z1e5r2r5s6t7u8v9w1x" is the encrypted form of a plain text password using SHA-512 algorithm.
 
 > It's important to note that Type 0 encryption is not recommended and it's better to use Type 5 or 6 encryption for password security.
+
+<br>
+
+---
+
+# Switch Interfaces
+
+<br>
+
+---
+
+# IPv4 Header
+
+- <span style="font-weight:500;font-size:20px">`Version`</span> : The "version" field in an IP (Internet Protocol) header is a 4-bit field that indicates the version of IP being used. There are currently two versions of IP in use: IPv4 and IPv6.
+
+  IPv4 uses a 32-bit address space, and the version field in the IP header is set to 4.
+
+  IPv6 uses a 128-bit address space, and the version field in the IP header is set to 6.
+
+  It's important to note that the IPv6 header is much simpler than IPv4, and includes more fields like traffic class, flow label and next header, which are not present in IPv4 header. This is because IPv6 was designed to address the shortcomings of IPv4 and to better support the growing number of Internet-connected devices.
+
+  In summary, the version field in the IP header is used to indicate the version of IP being used, which is either IPv4 or IPv6. The version field is 4-bits in size, and its value is set to 4 for IPv4 and 6 for IPv6.
+
+  <br>
+
+- <span style="font-weight:500;font-size:20px">`Internet Header Length (IHL)`</span> : The Internet Header Length (IHL) is a field in the header of an IPv4 packet that specifies the length of the header in 32-bit words. This field is 4 bits in size, which means that the maximum header length that can be specified is 15 words (60 bytes). The IHL field is located in the first byte of the IP header, and it tells the receiving host the size of the IP header in 32-bit words.
+
+  The IHL is used by routers to determine where the actual data in the packet begins, so that they can process the packet correctly. The IHL value is necessary because the header of an IP packet can vary in length due to the inclusion of optional fields, such as those used for security or Quality of Service (QoS).
+
+  An example of an IHL value would be a value of 5, which would indicate that the header of the packet is 20 bytes long (5 words \* 4 bytes per word). A value of 5 in the IHL field is equivalent to 20 (decimal) in the first octet of the IP header. In other words, the first octet of the IP header is divided into two fields, the first 4 bits are IHL and the next 4 bits are version, version 4.
+
+  Another example, If the IHL value is 10, this would indicate that the header of the packet is 40 bytes long (10 words \* 4 bytes per word) and so on.
+
+  The IHL field is used by routers and other networking devices to quickly determine the size of the IP header, which is essential for processing the packet. It also helps in determining the size of the data payload in the packet, which is the amount of data that the packet is carrying.
+
+  In summary, Internet Header Length (IHL) is a field in the header of an IPv4 packet that specifies the length of the header in 32-bit words and it is necessary for routing and processing the packet correctly.
+
+  <br>
+
+- <span style="font-weight:500;font-size:20px">`Differentiated Services Code Point (DSCP)`</span> : DSCP (Differentiated Services Code Point) is a field in the IP header that is used to provide Quality of Service (QoS) in networks. It is a 6-bit field that is used to classify and prioritize different types of traffic.
+
+  The DSCP field is located in the Type of Service (ToS) byte of the IP header in IPv4 and the Traffic Class field in the IPv6 header.
+
+  The DSCP value is set by the sender, and it is used by routers and switches along the path to the destination to determine how to handle the traffic. For example, a DSCP value of 46 (binary: 101110) might indicate that the traffic is for a high-priority, real-time application, such as video conferencing, while a DSCP value of 0 (binary: 000000) might indicate that the traffic is for best-effort, non-critical data.
+
+  The DSCP values are divided into two parts: the most-significant 3 bits are called the "DSCP field", and the least-significant 3 bits are called the "ECN (Explicit Congestion Notification) field".
+
+  The most common DSCP values and their meanings are:
+
+  - DSCP=0: Best-Effort, non-critical data
+  - DSCP=8: Voice (VoIP)
+  - DSCP=24: Video
+  - DSCP=48: Critical Data
+
+  The DSCP values are usually mapped to the internal priority queue of the network devices, where the higher the DSCP value, the higher the priority of the traffic.
+
+  In summary, DSCP is a field in the IP header that is used to provide Quality of Service (QoS) in networks by classifying and prioritizing different types of traffic. It is a 6-bit field located in the Type of Service (ToS) byte of the IP header in IPv4 and the Traffic Class field in the IPv6 header. DSCP values are usually mapped to the internal priority queue of the network devices, where the higher the DSCP value, the higher the priority of the traffic.
+
+  <br>
+
+- <span style="font-weight:500;font-size:20px">`Explicit Congestion Notification (ECN)`</span> : ECN (Explicit Congestion Notification) is a mechanism used in IP networks to provide an early warning of network congestion. It is a 2-bit field in the IP header that is used in conjunction with the DSCP (Differentiated Services Code Point) field to provide Quality of Service (QoS) in networks.
+
+  The ECN field is located in the last 2 bits of the Type of Service (ToS) byte in IPv4 and the last 2 bits of the Traffic Class field in IPv6.
+
+  ECN allows routers to signal back to the sender that the network is becoming congested, allowing the sender to reduce its transmission rate and thus help alleviate the congestion.
+
+  The ECN field has two possible values:
+
+  - 00: Not-ECT (Not ECN-Capable Transport)
+  - 01: ECT(1) (ECN-Capable Transport)
+  - 10: CE (Congestion Experienced)
+
+  When a packet is sent with the ECN field set to 00, routers will not signal congestion to the sender. When a packet is sent with the ECN field set to 01, routers are allowed to signal congestion to the sender. If a router detects congestion, it will set the ECN field to 10, indicating that the packet has experienced congestion.
+
+  In summary, ECN is a mechanism used in IP networks to provide an early warning of network congestion. It is a 2-bit field in the IP header that is used in conjunction with the DSCP field to provide Quality of Service (QoS) in networks. When a router detects congestion, it will set the ECN field to 10, indicating that the packet has experienced congestion. ECN allows routers to signal back to the sender that the network is becoming congested, allowing the sender to reduce its transmission rate and thus help alleviate the congestion.

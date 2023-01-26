@@ -92,3 +92,133 @@ Ethernet also supports a variety of different media types, such as twisted-pair 
 Ethernet is a widely used technology and is the foundation for many networks, including LANs in homes and businesses, as well as the backbone of many enterprise and service provider networks.
 
 In summary, Ethernet is a technology for connecting devices on a LAN, it defines a set of standards for physical and data link layers, it uses a bus or star topology, twisted-pair or coaxial cables and supports different data rates and media types, it
+
+<br>
+
+---
+
+# Router typically has multiple MAC addresses
+
+A router typically has multiple MAC addresses, one for each of its network interfaces. These interfaces can include LAN (Local Area Network) ports for connecting to devices on the internal network, and WAN (Wide Area Network) ports for connecting to the internet or other external networks.
+
+Each interface on a router is assigned a unique MAC address by the manufacturer, and these addresses are used to identify the source and destination of network traffic. When a packet of data is sent from one device to another on the same network, the MAC address of the source device is used as the source address in the packet, and the MAC address of the destination device is used as the destination address.
+
+When the data packet needs to be sent to a different network, the router uses its routing table to determine the best path for the packet and then uses the MAC address of the interface that connects to that network as the destination address.
+
+A router's multiple MAC addresses work by allowing it to connect to multiple networks and route traffic between them. Each network interface on a router is assigned a unique MAC address, which is used to identify the source and destination of network traffic.
+
+For example, consider a router that connects a LAN (Local Area Network) to a WAN (Wide Area Network) . The router has two interfaces:
+
+1. LAN interface with MAC address 00:11:22:33:44:55
+
+2. WAN interface with MAC address 66:77:88:99:AA:BB
+
+When a device on the LAN (such as a computer) wants to communicate with a device on the WAN (such as a website), the router uses its routing table to determine the best path for the packet.
+
+The router then uses the LAN interface's MAC address (00:11:22:33:44:55) as the source address in the packet and the WAN interface's MAC address (66:77:88:99:AA:BB) as the destination address.
+
+This way, the device on the LAN knows that the packet is coming from the router, and the device on the WAN knows that the packet is intended for it. When the packet is received by the router, it uses the destination MAC address to determine which interface to forward the packet to, in this case the WAN interface.
+
+Additionally, when a packet is received on a specific interface, the router checks the destination MAC address in the packet, if it matches with any of the interfaces MAC address that means the packet is intended for the router and it will process it accordingly.
+
+In this way, the router can connect to multiple networks and route traffic between them using its multiple MAC addresses. The router keeps a table of MAC addresses and their corresponding interfaces, so that when a packet is received on a specific interface, the router knows where it should be forwarded.
+
+<br>
+
+---
+
+# Broadcast IP address
+
+A broadcast IP address is used to send a message to all devices on a network, rather than a specific device. In IP networking, a broadcast address is a network address at which all devices connected to a multiple-access communications network are enabled to receive datagrams.
+
+An example of when a broadcast IP address might be used is in the process of DHCP (Dynamic Host Configuration Protocol) in which a device, such as a computer, requests an IP address from a DHCP server. The DHCP server sends a broadcast message to all devices on the network, offering an IP address to any device that requests one. The device that requested the IP address responds to the broadcast message, and the DHCP server assigns the requested IP address to that device.
+
+Another example could be when a network administrator needs to send a message to all devices on a network, they can use the broadcast IP address to ensure that the message is received by all devices.
+
+Note: Broadcast IP addresses are usually represented in dotted decimal notation, and it is identified by the fact that it has all host bits set to 1.
+
+<br>
+
+---
+
+# Default Gateway
+
+A default gateway is a routing device or host on a computer network that serves as an access point to other networks or the internet. It is used to forward network traffic from a device on a local network to other networks or the internet.
+
+In most cases, a default gateway is a router. This router connects a local network to the internet or to another network. The default gateway is usually assigned an IP address, such as 192.168.1.1 or 10.0.0.1.
+
+When a device on a local network wants to communicate with a device on another network or the internet, it sends the data to the default gateway. The default gateway then forwards the data to the next hop on the path to its destination.
+
+For example, imagine a local network with several devices connected to a router. The router is connected to the internet. The router's IP address is 192.168.1.1, and it is configured as the default gateway for the devices on the local network. When one of the devices on the local network wants to access a website, it sends the request to the router at IP address 192.168.1.1. The router then forwards the request to the internet, where the website's server responds. The response is then sent back to the device via the router.
+
+Another example, imagine a local network has multiple VLANs, and each VLAN has a different default gateway. Each VLAN is connected to different router, which is configured as the default gateway for the VLAN. When a device on one VLAN wants to communicate with a device on another VLAN, the device sends the data to its default gateway, the router which is configured for that VLAN, then the router forwards the data to the next hop on the path to its destination.
+
+In short, a default gateway is an IP address that devices on a local network use to send data to other networks or the internet. It is typically a router that connects the local network to other networks or the internet.
+
+<br>
+
+---
+
+# Network Topology
+
+!["Network Topology"](/network-topology-types-diagram.png)
+
+Network topology refers to the physical or logical layout of a computer network. It describes the arrangement of devices and the connections between them. The topology of a network can have a significant impact on its performance, security, and ease of management.
+
+There are several common types of network topologies, including:
+
+Bus topology: All devices are connected to a single cable or bus, which is the backbone of the network. Data is transmitted along the bus in both directions.
+
+Star topology: All devices are connected to a central hub or switch. Data is transmitted from one device to the hub and then sent to the appropriate device.
+
+Ring topology: All devices are connected in a closed loop. Data is transmitted around the loop in a single direction.
+
+Mesh topology: Each device is connected to multiple other devices. Data can be transmitted along multiple paths to reach its destination.
+
+Tree topology: A combination of bus and star topologies. A central bus or backbone connects to multiple branches, each containing multiple devices.
+
+Hybrid topology: It is a combination of two or more different topologies. It is designed to overcome the limitations of a single topology.
+
+The choice of network topology can depend on several factors, such as the size of the network, the type of devices and applications, the availability of resources and the desired level of fault tolerance.
+
+In summary, Network topology refers to the physical or logical layout of a computer network, it describes the arrangement of devices and the connections between them. Different topologies have different advantages and disadvantages, and the choice of topology will depend on the needs of the network.
+
+<br>
+
+---
+
+# 10/100/1000Base-T Ports (1 - 24) - Ports are Auto-MDIX
+
+10/100/1000Base-T ports (1-24) refer to a range of Ethernet ports on a network device, such as a switch, that support 10Mbps, 100Mbps, and 1000Mbps speeds (also known as 10Base-T, 100Base-T, and 1000Base-T, respectively). These ports are typically labeled as "10/100/1000" or "Gigabit" Ethernet ports, and they are capable of automatically detecting and adjusting to the speed of the connected device.
+
+<span style="color:#d19a66">**Auto MDIX (Auto Media-Dependent Interface Crossover) is a feature that allows the ports to automatically detect and configure the correct cable type (straight-through or crossover) and pinout (T568A or T568B) for the connection.**</span> This eliminates the need for manual configuration or the use of crossover cables.
+
+For example, imagine you have a switch with 24 10/100/1000Base-T ports (1-24) and you want to connect it to a computer. Normally, you would need to check the pinout of the computer's Ethernet port and the switch port and use a crossover cable if they are different. But with Auto MDIX, you can simply use a straight-through cable and the switch will automatically detect and configure the correct pinout for the connection.
+
+This feature allows for more flexibility when connecting devices, as it eliminates the need for different types of cables, and also reduces the chance of misconfiguration and connectivity issues.
+
+It's also worth mentioning that not all networking equipment have this feature, so it's important to check the device's specifications before making a purchase.
+
+<br>
+
+---
+
+# Different types of interfaces in Cisco devices
+
+Cisco devices, such as routers and switches, have a variety of interface types that can be used for different purposes. Some of the most commonly used interface types include:
+
+Ethernet interfaces - These are used to connect to LANs (Local Area Networks) and are typically used for data transfer between devices. An example of an Ethernet interface on a Cisco router would be Fast Ethernet interface 0/0.
+
+Serial interfaces - These are used to connect to WANs (Wide Area Networks) and are typically used for data transfer between different locations. An example of a serial interface on a Cisco router would be Serial interface 0/0/0.
+
+Console interface - This is a special type of interface that is used for local management of the device. It is typically used for initial configuration and troubleshooting. An example of a console interface on a Cisco router would be the default console interface.
+
+AUX interface - This is also a special type of interface that is used for local management of the device. It is typically used for backup configuration and troubleshooting. An example of an AUX interface on a Cisco router would be the default AUX interface.
+
+Virtual interfaces - These interfaces are logical interfaces that are used to create multiple virtual interfaces on a single physical interface. An example of a virtual interface on a Cisco router would be Virtual-Access interface 1.
+
+Tunnel interfaces - These interfaces are logical interfaces that are used to create tunnels between two or more devices. An example of a Tunnel interface on a Cisco router would be Tunnel interface 1.
+
+Loopback interfaces - These interfaces are logical interfaces that are used to create a virtual interface for testing and troubleshooting. An example of a loopback interface on a Cisco router would be Loopback interface 0.
+
+In addition to these interface types, Cisco devices also have other specialized interfaces such as BVI (Bridge-Group Virtual Interface) for LAN switching, SVI (Switched Virtual Interface) for Layer 3 switching, and many others.
